@@ -1,0 +1,6 @@
+definitions:
+  Project:
+    properties:
+      id:
+        type: integer
+        description: Unique identifier representing a specific QAProject.

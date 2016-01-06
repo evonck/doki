@@ -1,0 +1,6 @@
+doc:
+    image: nginx2
+    volumes:
+        - ./docs:/usr/share/nginx/html
+    ports:
+        - "8080:80"

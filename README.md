@@ -29,4 +29,4 @@ Mac Os:
 	http://$DockerMachineIp:8080
 ```
 
-![Alt text](test.png "Doc")
+![alt tag](https://raw.github.com/evonck/doki/master/img/test.png)

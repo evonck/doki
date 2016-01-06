@@ -52,5 +52,5 @@ docs
 ```
 
 
-![Alt text](../img/test.png "Doc")
+![alt tag](https://raw.github.com/evonck/doki/master/img/test.png)
 

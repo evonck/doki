@@ -2,6 +2,8 @@
 
 DOKI provides a simple interface to generate html documentation from swagger yaml files.
 
+![alt tag](https://raw.github.com/evonck/doki/master/img/Doki.png)
+
 ## Prerequisite
 - [Bootprint swagger](https://github.com/nknapp/bootprint-swagger)
 - [Gox](https://github.com/mitchellh/gox)

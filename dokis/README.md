@@ -1,6 +1,6 @@
 # Dokis
 
-Dokis generate a simple index html page containing the documentation of all of your project using sagger yaml files.
+Dokis generate a simple index html page containing the documentation of all of your project using sagger yaml or json files.
 
 ## Prerequisite
 - [bootprint swagger](https://github.com/nknapp/bootprint-swagger)
@@ -16,6 +16,12 @@ go build
  ./dokis pathToTheYamlFiles ouptutPath
 ```
 Dockis will create json files from the yaml and use bootprint-swagger to change them to html documentation.
+
+
+## Required
+To run doki locally you need to install bootprint swagger on your machine:
+
+https://www.npmjs.com/package/bootprint
 
 ## Command Line
   - --force, -f

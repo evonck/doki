@@ -14,15 +14,17 @@ body {
  * Global add-ons
  */
 
-
+#branImg{
+  display:inline-block;
+}
 
 @media (min-width: 768px) {
   .container{
-  display:inline;
-}
-.container-swagger{
-  display:block;
-}
+    display:inline;
+  }
+  .container-swagger{
+    display:block;
+  }
 }
 
  .visible {

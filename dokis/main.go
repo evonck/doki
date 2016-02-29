@@ -53,6 +53,7 @@ func main() {
 	}
 	app.Action = func(c *cli.Context) {
 		if len(c.Args()) == 0 {
+			log.Print("Please specify the input folder")
 			return
 		}
 		if len(c.Args()) == 1 {
@@ -119,6 +120,7 @@ func copyFile(destination, source string) error {
 }
 
 func CreateIndex() {
+	log.Print("CreateIndex")
 	if indexPath != "" {
 		copyFile(path.Join(output, "index.html"), path.Join(indexPath, "index.html"))
 		copyFile(path.Join(output, "nav.css"), path.Join(indexPath, "nav.css"))
@@ -129,6 +131,11 @@ func CreateIndex() {
 func findFile(pathFile string, size int) {
 	if strings.Contains(pathFile, ".yaml") {
 		outputFolderName := strings.Replace(pathFile, ".yaml", "", -1)
+		ConvertYaml(pathFile, path.Join(output, outputFolderName), outputFolderName)
+		return
+	}
+	if strings.Contains(pathFile, ".json") {
+		outputFolderName := strings.Replace(pathFile, ".json", "", -1)
 		ConvertFile(pathFile, path.Join(output, outputFolderName), outputFolderName)
 		return
 	}
@@ -151,12 +158,16 @@ func findFile(pathFile string, size int) {
 		}
 		if strings.Contains(f.Name(), ".yaml") {
 			outputFolderName := strings.Replace(f.Name(), ".yaml", "", -1)
+			ConvertYaml(path.Join(pathFile, f.Name()), path.Join(output, pathFile, outputFolderName), outputFolderName)
+		}
+		if strings.Contains(f.Name(), ".json") {
+			outputFolderName := strings.Replace(f.Name(), ".json", "", -1)
 			ConvertFile(path.Join(pathFile, f.Name()), path.Join(output, pathFile, outputFolderName), outputFolderName)
 		}
 	}
 }
 
-func ConvertFile(filePath, outputFolder, fileName string) {
+func ConvertYaml(filePath, outputFolder, fileName string) {
 	source, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		panic(err)
@@ -186,11 +197,16 @@ func ConvertFile(filePath, outputFolder, fileName string) {
 		log.Debug("Error while writting file")
 		return
 	}
-	exec.Command("bootprint", "swagger", filePath, outputFolder).Output()
+	ConvertFile(nameFile, outputFolder, fileName)
 	os.Remove(nameFile)
+
+}
+
+func ConvertFile(nameFile, outputFolder, fileName string) {
+	exec.Command("bootprint", "swagger", nameFile, outputFolder).Output()
 	indexName := path.Join(outputFolder, "index.html")
 	newName := path.Join(outputFolder, fileName+".html")
-	htmlPath := path.Join(strings.Replace(filePath, ".yaml", "", 1), fileName+".html")
+	htmlPath := path.Join(strings.Replace(nameFile, ".json", "", 1), fileName+".html")
 	os.Rename(indexName, newName)
 	cssName := path.Join(outputFolder, "main.css")
 	os.Remove(cssName)
